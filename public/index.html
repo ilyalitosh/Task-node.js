@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<meta charset="utf-8"></meta>
+		<title>Task</title>
+	</head>
+	<body>
+		<form method="post" name="send-form">
+			<input type="text" name="input-data"></input>
+			<input type="submit" name="send-data-button"></input><br><br>
+			<label name="result-data">Здесь будет результат</label>
+		</form>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script>
+			$("form[name=\"send-form\"]").submit(function(e){
+				e.preventDefault();
+				
+				var form = document.forms["send-form"];
+				var inputDataForSending = form.elements["input-data"].value;
+				
+				$.ajax({
+					type : "POST",
+					url : "",
+					data : JSON.stringify({data: inputDataForSending}),
+					dataType: "json",
+					contentType: "application/json",
+					success : function(data){
+						document.getElementsByName("result-data")[0].innerHTML = data.data;
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
